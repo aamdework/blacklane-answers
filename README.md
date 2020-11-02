@@ -7,7 +7,7 @@ Deploy the clones :)
 Thank you for interviewing with Blacklane. If you're here, it means we'd
 like to understand your development process and understanding of SLDC.
 
-To get started, please ***fork this repo, then begin work***. Spend as much much time
+To get started, please ***[mirror this repo](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/duplicating-a-repository#mirroring-a-repository), change the repository name, then begin work***. Mirroring instead of forking as well as renaming are recommended for privacy concerns. Spend as much much time
 you feel is reasonable. It doesn’t matter if the project is "complete", nothing ever is.
 
 # Application
