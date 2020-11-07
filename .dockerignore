@@ -1,1 +1,5 @@
 # What about adding something here?
+.git
+.cache
+.gitignore
+*.yml
