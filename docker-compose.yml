@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+  devops_interview_app:
+    build: .
+    depends_on:
+      - postgres_db
+    environment:
+      USER_NAME: Abebe
+      USER_URL: interview
+      DATABASE_URL: postgresql+psycopg2://test:test@postgres_db/test
+    networks:
+      - default
+    ports:
+      - 5555:5555
+    volumes:
+      - ./migrations:/usr/src/app/migrations
+    restart: always
+
+  postgres_db:
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    image: postgres:latest
+    networks:
+      - default
+    ports:
+      - 5405:5432
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
