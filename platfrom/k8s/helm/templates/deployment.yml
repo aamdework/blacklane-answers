@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.appLabel }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "{{ .Values.appLabel }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Values.appLabel }}"
+    spec:
+      containers:
+      - name: "{{ .Values.appLabel }}"
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 5432
+      - name: postgres_db
+        image: postgres:latest
+        env:
+        - name: POSTGRES_DB
+          value: test
+        - name: POSTGRES_USER
+          value: test
+        - name: POSTGRES_PASSWORD
+          value: test
+      imagePullSecrets:
+        - name: devops-interview-cr-secret
+      restartPolicy: Always

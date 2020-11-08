@@ -1,0 +1,81 @@
+ pipeline {
+
+        agent any
+
+        environment {
+            APP_CURRENT_VERSION = "unset"
+        }
+
+        stages {
+
+            stage("Build") {
+                steps {
+                    container('python:3.8.0-alpine + pip install -r requirements.tx') {
+                    sh  '''
+                    #!/bin/sh -e
+
+                    cd docker
+                    ./make-image.sh -r \${registry}
+                    ./push-image.sh -r \${registry}
+                     '''
+                    }
+                }
+            }
+
+            stage("Test") {
+                steps {
+                    container('python:3.8.0-alpine + pip install -r requirements.tx') {
+                    sh 'pip install -r requirements.test.txt'
+                    echo "Code style check"
+                    sh 'flake8 app.py'
+                    echo "Static typing check"
+                    sh 'mypy app.py'
+                    echo "Test Coverage"
+                    sh 'coverage run'
+                    }
+                }
+            }
+
+            stage("DB_Migration") {
+                steps {
+                    container('python:3.8.0-alpine + pip install -r requirements.tx') {
+                        sh 'flask db upgrade'
+                    }
+                }
+            }
+
+            stage("publish") {
+                steps {
+                    container('python:3.8.0-alpine + pip install -r requirements.tx') {
+                    sh "twine upload dist/*"
+                    }
+                }
+            }
+
+             stage("deploy") {
+                 steps {
+                     container('python:3.8.0-alpine + pip install -r requirements.tx') {
+                     sh '''
+                         #!/bin/sh -e
+
+                         cd docker/k8s
+                         ./deploy.sh -e \${ENVIRONMENT}
+                     '''
+                      }
+                 }
+             }
+
+        }
+
+        post {
+            success {
+                container('python:3.8.0-alpine + pip install -r requirements.tx') {
+                    script {
+                    sh '''
+                    ../increment-version.sh
+                    '''
+                    }
+                }
+            }
+        }
+    }

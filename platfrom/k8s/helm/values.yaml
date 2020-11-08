@@ -1,0 +1,24 @@
+appLabel: devopsinterview
+image:
+  repository: "cr/devops-interview"
+  pullPolicy: "IfNotPresent"
+  tag: "1.0.1"
+
+imageCredentials:
+  registry: "registry.hub.docker.com"
+  username: ""
+  password: ""
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "500Mi"
+  requests:
+    cpu: "500m"
+    memory: "500Mi"
+
+hpa:
+  minNumberOfReplicas: 1
+  maxNumberOfReplicas: 1
+  targetAverageUtilization: 90
+
