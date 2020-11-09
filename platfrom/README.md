@@ -2,20 +2,18 @@
 
 # Introduction
 
-Deploy the clones :) 
-
-Thank you for interviewing with Blacklane. If you're here, it means we'd
-like to understand your development process and understanding of SLDC.
-
-To get started, please ***[mirror this repo](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/duplicating-a-repository#mirroring-a-repository), change the repository name, then begin work***. Mirroring instead of forking as well as renaming are recommended for privacy concerns. Spend as much much time
-you feel is reasonable. It doesn’t matter if the project is "complete", nothing ever is.
+In this repository , i have added codes for containerization , ci/cd and bash scripts to orchestrate the various deployment related tasks.
+The easiest way to start the app is to run `docker-compose up` in the project directory. I have also added a Jenkins file  for jenkins pipe line.
+I have provided two version of going  about doing that tasks. The first batch is in the  project root and the second is  in a directory named platfrom in the project root.
+One does not need both , my attempt to showing how one can go about achieving the tasks. 
 
 # Tools and Technologies
 
 - Jenkins 
 - Bash
-- helm
-- docker
+- Helm
+- Docker
+- Jenkins docker plugin
 
 ## Files description
 
