@@ -17,9 +17,12 @@ spec:
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: 5432
+        - containerPort: 5555
       - name: postgres_db
         image: postgres:latest
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+          - containerPort: 5432
         env:
         - name: POSTGRES_DB
           value: test

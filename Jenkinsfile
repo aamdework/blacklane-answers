@@ -112,7 +112,7 @@ void updateVersion(String fileName, String currentVersion) {
 
         def buildVersion = "${currentVersion.substring(0, buildNumberIdx)}.${NewBuildNumber}"
 
-        def newVersion = "version=" + buildVersion + "\n"
+        def newVersion = buildVersion + "\n"
 
         step.writeFile file: fileName, text: newVersion
     }
@@ -133,18 +133,7 @@ void updateVersion(String fileName, String currentVersion) {
 
 String getVersion(String fname)
 {
-    def content = step.readFile fname
-
-    def version = ""
-    def parts = content.split("\n")
-    for(p in parts)
-    {
-        if(p.startsWith("version="))
-        {
-            version = p.replace("version=","")
-
-        }
-    }
-
+    def version =""
+    new File(fname).withReader { version = it.readLine() }
     return version
 }

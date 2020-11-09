@@ -1,0 +1,14 @@
+resources:
+  limits:
+    #300% of CPU Core (i.e 3 cores)
+    cpu: "3000m"
+    memory: "2048Mi"
+  requests:
+    cpu: "500m"
+    memory: "2048Mi"
+
+hpa:
+  minNumberOfReplicas: 1
+  maxNumberOfReplicas: 1
+  targetAverageUtilization: 90
+  targetAverageMemoryValue: "10Gi"
